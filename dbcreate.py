@@ -25,6 +25,18 @@ class Faculty(Base):
 		return self.cname+"|"+self.fac
 
 
+class Perc(Base):
+	__tablename__="perc"
+	studname=Column(String(10), primary_key=True)
+	course=Column(String(10), primary_key=True)
+	perc=Column(String(10))
+	def __init__(self,studname,course,perc):
+		self.studname= studname
+		self.course= course
+		self.perc= perc
+	def __str__(self):
+		return self.studname+"|"+self.course+"|"+str(self.perc)
+
 class Stud(Base):
 	__tablename__="stud"
 	studname=Column(String(10), primary_key=True)
@@ -103,6 +115,31 @@ def getstudforcourses(cname):
 		if(i.courses==cname):
 			list1.append(i.studname)
 	print(list1)
+	return list1
+
+
+def inserperc(studname,course,perc):
+	engine=create_engine("sqlite:///as1.db")
+	engine.connect()
+	session= sessionmaker(bind=engine)()
+	userrow = Perc(studname,course,perc)
+	session.add(userrow)
+	try:
+		session.commit()
+	except:
+		print("Try Again")
+		session.rollback()
+
+
+def getpercrows():
+	engine=create_engine("sqlite:///as1.db")
+	engine.connect()
+	session= sessionmaker(bind=engine)()
+	result=[r for r in session.query(Perc).all()]
+	list1=[]
+	for i in result:
+		if(i.perc<85):
+			list1.append((i.user,i.password,i.isfaculty))
 	return list1
 
 

@@ -38,5 +38,20 @@ users = Table(
 )
 
 
+
+
+perc = Table(
+   'perc', meta,
+	Column('studname', String(10), primary_key = True), 
+	Column('course', String(10), primary_key = True), 
+	Column('perc', Float),  
+)
+
+
+
+
+
+
+
 meta.create_all(engine)
 
