@@ -121,7 +121,7 @@ def stuCourse():
     stuCourseWin.title("courses")
     allCourses = getallcourses() #get all courses here and remove the next list   
     for i in allCourses:
-        cBtn = tkinter.Button(stuCourseWin, text=i,command=partial(addStuCourse, i), bg='lightblue', fg='black', height="2", width="25")
+        cBtn = tkinter.Button(stuCourseWin, text=i,command=partial(addStuCourse), bg='lightblue', fg='black', height="2", width="25")
         cBtn.pack()
 
 def addStuCourse():
